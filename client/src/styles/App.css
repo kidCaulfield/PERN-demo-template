@@ -1,0 +1,73 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 20vmin;
+  pointer-events: none;
+}
+
+.App-main {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/*====================== Forms =======================*/
+
+.label {
+  color: #61dafb;
+  font-size: 1em;
+}
+
+.input {
+  margin: 0px 0px 10px 0px;
+  font-weight: bold;
+  font-size: 14px;
+  width: 90vw;
+  max-width: 250px;
+  height: 25px;
+  border-radius: 5px;
+  border-style: inset;
+  border-width: 2px;
+  border-color: lightgray;
+  padding-left: 5px;
+}
+
+.button {
+  background-color: rgb(200, 255, 0);
+  color: black;
+  height: 30px;
+  width:100px;
+  font-weight: bold;
+  font-family: helvetica neue;
+  font-size: 18px;
+  border-radius: 5px;
+  margin: 0px 5px 5px 0px;
+  border-style: none;
+}
+
+/*================== Element Styles ======================*/
+
+h1 {
+  margin: 5px 0px 10px 0px;
+}
