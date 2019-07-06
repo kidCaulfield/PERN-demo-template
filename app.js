@@ -59,6 +59,9 @@ app.options('*', cors({
 const usersRouter = require("./routes/users");
 app.use("/api", usersRouter);
 
+const sessionRouter = require("./routes/session")
+app.use("/api", sessionRouter);
+
 // app.get('*', (req, res) => {
 //   res.sendFile(path.join(__dirname, './client/build/index.html'));
 // })
