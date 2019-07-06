@@ -5,6 +5,7 @@ const logger = require('morgan');
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
 const cors = require('cors');
+const crypto = require('crypto');
 
 //////////////////////////////////////////////////////////////////////
 /*                          Middle Ware                             */
@@ -15,6 +16,36 @@ const cors = require('cors');
 app.use(logger("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
+
+const localRedis = { port: 6379, host: 'localhost' };
+const deployedRedis = { url: process.env.REDIS_URL };
+
+const genuuid = () => {
+  return crypto.randomBytes(64).toString('hex');
+}
+
+var sess = {
+  genid: function(req) {
+    return genuuid()
+  },
+  userId: null,
+  name: "COOOKIE!!!!",
+  secret: crypto.randomBytes(64).toString('hex'),
+  store: new RedisStore((process.env.NODE_ENV === 'production') ? deployedRedis : localRedis),
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false,
+            maxAge: 30 * 24 * 60 * 60 * 1000,
+            HttpOnly: false,
+            path: '/' }
+}
+ 
+if (app.get('env') === 'production') {
+  app.set('trust proxy', 1)
+  sess.cookie.secure = true
+}
+ 
+app.use(session(sess))
 
 //////////////////////////////////////////////////////////////////////
 /*                            Routes                                */
