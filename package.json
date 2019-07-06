@@ -7,11 +7,17 @@
   "author": "Wes Coderre",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "db:create": "createdb -e pern_demo",
+    "db:drop": "dropdb --if-exist -e pern_demo",
+    "db:migrate": "knex migrate:latest",
+    "db:reset": "npm run db:drop && npm run db:create && npm run db:migrate",
+    "redis": "redis-server /usr/local/etc/redis.conf"
   },
   "dependencies": {
     "bcrypt": "^3.0.6",
     "connect-redis": "^3.4.1",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-session": "^1.16.2",
     "knex": "^0.18.3",
