@@ -37,6 +37,6 @@ module.exports = class User {
       password_digest: await bcrypt.hash(password, saltRounds)
     }).returning('*');
     
-    return newUser
+    return newUser[0];
   };
 }
