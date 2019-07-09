@@ -31,7 +31,6 @@ export const Session = {
         },
         body: JSON.stringify(params)
       });
-      console.log(`response2: `, response);
       const session = await response.json();
 
       return session;

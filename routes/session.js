@@ -7,6 +7,6 @@ const conf = require("./cors");
 router.options("*", cors(conf.corsOptionsDelegate));
 router.post("/session", cors(conf.corsOptionsDelegate), conf.preFlight, sessionController.create);
 router.delete("/session", cors(conf.corsOptionsDelegate), conf.preFlight, sessionController.destroy);
-router.get("/session", cors(conf.corsOptionsDelegate), conf.preFlight, sessionController.sessionInProgress)
+router.get("/session", cors(conf.corsOptionsDelegate), conf.preFlight, sessionController.get)
 
 module.exports = router;

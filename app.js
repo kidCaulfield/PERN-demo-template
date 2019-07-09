@@ -13,54 +13,60 @@ const crypto = require('crypto');
 
 // app.use(express.static(`./client/build`))
 
-app.use(logger("dev"));
+app.use(logger('dev'));
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json())
+app.use(express.json());
 
 const localRedis = { port: 6379, host: 'localhost' };
 const deployedRedis = { url: process.env.REDIS_URL };
 
 const genuuid = () => {
   return crypto.randomBytes(64).toString('hex');
-}
+};
 
 var sess = {
   genid: function(req) {
-    return genuuid()
+    return genuuid();
   },
-  userId: null,
-  name: "COOOKIE!!!!",
+  name: 'COOOKIE!!!!',
   secret: crypto.randomBytes(64).toString('hex'),
-  store: new RedisStore((process.env.NODE_ENV === 'production') ? deployedRedis : localRedis),
+  store: new RedisStore(
+    process.env.NODE_ENV === 'production' ? deployedRedis : localRedis
+  ),
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: false,
-            maxAge: 30 * 24 * 60 * 60 * 1000,
-            HttpOnly: false,
-            path: '/' }
-}
- 
+  cookie: {
+    secure: false,
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    httpOnly: false,
+    path: '/',
+  },
+};
+
 if (app.get('env') === 'production') {
-  app.set('trust proxy', 1)
-  sess.cookie.secure = true
+  app.set('trust proxy', 1);
+  sess.cookie.secure = true;
 }
- 
-app.use(session(sess))
+
+app.use(session(sess));
 
 //////////////////////////////////////////////////////////////////////
 /*                            Routes                                */
 //////////////////////////////////////////////////////////////////////
 
-app.options('*', cors({
-  origin: ['http://localhost:3000'],
-  credentials: true,
-}))
+app.options(
+  '*',
+  cors({
+    origin: ['http://localhost:3000'],
+    credentials: true,
+  })
+);
 
-const usersRouter = require("./routes/users");
-app.use("/api", usersRouter);
+const usersRouter = require('./routes/users');
+app.use('/api', usersRouter);
 
-const sessionRouter = require("./routes/session")
-app.use("/api", sessionRouter);
+const sessionRouter = require('./routes/session');
+app.use('/api', sessionRouter);
 
 // app.get('*', (req, res) => {
 //   res.sendFile(path.join(__dirname, './client/build/index.html'));

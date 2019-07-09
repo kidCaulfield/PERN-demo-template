@@ -32,6 +32,11 @@
   }
 }
 
+.layout {
+  display: flex;
+  flex-direction: row;
+}
+
 /*====================== Forms =======================*/
 
 .label {
@@ -57,11 +62,13 @@
   background-color: rgb(200, 255, 0);
   color: black;
   height: 30px;
-  width:100px;
+  width: 100px;
   font-weight: bold;
   font-family: helvetica neue;
   font-size: 18px;
   border-radius: 5px;
+  border-radius: 5px;
+  border-style: inset;
   margin: 0px 5px 5px 0px;
   border-style: none;
 }

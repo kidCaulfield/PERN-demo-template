@@ -5,6 +5,7 @@ module.exports = {
   async create(req, res, next) {
     res.setHeader('Content-Type', 'application/json')
     const { email, password } = req.body;
+    console.log('req.body: ', req.body);
 
     try {
       const user = await knex("users")
@@ -13,6 +14,7 @@ module.exports = {
       if (user && (await bcrypt.compare(password, user.password_digest))) {
         req.session.userId = user.id;
         req.currentUser = {id: user.id, username: user.username};
+        console.log('req.session: ', req.session);
 
         res.status(200).json(req.currentUser);
       } else {
@@ -24,11 +26,11 @@ module.exports = {
   },
   async destroy(req, res) {
     req.session.destroy(function(){
-      res.clearCookie('COOOKIE!!!!', { path: '/' }).status(200).json({});
-      req.currentUser = undefined;
+      res.clearCookie('COOOKIE!!!!', { path: '/' });
+      res.status(200).json("Goodbye");
     });
   },
-  async sessionInProgress(req, res) {
+  async get(req, res) {
     if (typeof req.session.userId === "number") {
        const user = await knex("users")
         .select("id", "username")
