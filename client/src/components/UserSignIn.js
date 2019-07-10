@@ -15,7 +15,7 @@ const UserSignUp = ({ onSignIn }) => {
 
   return (
     <div className="UserSignUp">
-      <h1>Sign Up</h1>
+      <h1>Sign In</h1>
       <form onSubmit={handleSubmit} className="form">
         <div>
           <label className="label" htmlFor="email">email</label><br/>
@@ -25,7 +25,7 @@ const UserSignUp = ({ onSignIn }) => {
           <label className="label" htmlFor="password">password</label><br/>
           <input className="input" type="password" name="password"></input>
         </div>
-        <input className="button" type="submit" value="Sign Up" />
+        <input className="button" type="submit" value="Sign In" />
       </form>
     </div>
   )
