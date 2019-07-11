@@ -3,7 +3,9 @@ module.exports = {
   development: {
     client: 'pg',
     connection: {
-      database: 'pern_demo'
+      database: 'pern_demo',
+      user: process.env.DATABASE_USER,
+      password: 'password'
     },
     migrations: {
       tableName: 'migrations',
@@ -28,10 +30,10 @@ module.exports = {
   // },
 
   // production: {
-  //   client: 'postgresql',
+  //   client: 'pg',
   //   connection: {
   //     database: 'my_db',
-  //     user:     'username',
+  //     user: process.env.DATABASE_USER,
   //     password: 'password'
   //   },
   //   pool: {

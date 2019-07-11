@@ -11,7 +11,7 @@ const crypto = require('crypto');
 /*                          Middle Ware                             */
 //////////////////////////////////////////////////////////////////////
 
-// app.use(express.static(`./client/build`))
+app.use(express.static(`./client/build`))
 
 app.use(logger('dev'));
 app.use(express.urlencoded({ extended: true }));
@@ -68,9 +68,9 @@ app.use('/api', usersRouter);
 const sessionRouter = require('./routes/session');
 app.use('/api', sessionRouter);
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, './client/build/index.html'));
-// })
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './client/build/index.html'));
+})
 
 //////////////////////////////////////////////////////////////////////
 /*                            Server                                */
